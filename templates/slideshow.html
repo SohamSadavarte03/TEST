@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MAKE VIDEO</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="static/slideshow.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a data-text="AKS Photoshop" href="{{url_for('home2',user=user)}}"><b>AKS Photoshop</b></a>
+            </div>
+            <div class="nav-links">
+                <a class="nav-link" href="{{url_for('dropphoto',user=user)}}">Drop Photos</a>
+                <a style="background-color: #0088a9;" class="nav-link" href="{{url_for('slideshow',user=user)}}">Slide
+                    Show</a>
+                <a class="nav-link" href="{{url_for('display',user=user)}}">Display</a>
+                <div class="dropdown">
+                    <button class="nav-link dropdown-toggle">Hello, {{user.first_name}}</button>
+                    <div class="dropdown-menu">
+                        <!-- <a href="#">Profile</a> -->
+                        <a href="/logout">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+
+
+
+    <div class="buttons">
+        <button style="display: none;" class="music">Add Music</button>
+        <button style="display: none;" class="play">Play</button>
+        <button style="display: none;" class="pause">Pause</button>
+        <br><br><br><br><br>
+    </div>
+    <div style="display: none;" class="video">
+
+    </div>
+
+    <div
+        style="display: flex;justify-content: center; width: 700px;height: 400px;overflow: hidden;border-radius: 10px;margin-left: 27%;margin-bottom: 5%;">
+        <video
+            style="margin-bottom: 3%;width: 100%; border-radius: 10px;height: 100%;object-fit: cover; background-color: #0088a9;"
+            controls autoplay>
+
+            <source src="{{ url_for('get_video', user_id=user.id) }}" type="video/mp4">
+
+        </video>
+    </div>
+    <div style="background-color:#1F2739;padding: 0;" class="container">
+
+
+        <input type="text" id="searchInput" placeholder="Search photos..." onkeyup="searchImages()">
+        <form id="slideshowForm" method="post">
+
+            <button style="margin-left: 42%;" type="submit" class="create">Create Video</button>
+
+
+
+
+            <table class="tables">
+                <thead>
+                    <tr>
+                        <th style="color: #FFF842;">Selection</th>
+                        <th style="color: #FFF842;">Image</th>
+                        <th style="color: #FFF842;">Name</th>
+                        <th style="color: #FFF842;">Audio</th>
+                        <th style="color: #FFF842;">Duration</th>
+                        <th style="color: #FFF842;">Transition</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for pic in user.img%}
+                    <tr class="image-cell">
+                        <td><input style="transform: scale(1.5); margin-right: 5px;" type="checkbox"
+                                name="selected_images[]" value="{{ pic.id }}"></td>
+                        <td><img style="width: 300px; height: auto;" src="{{ url_for('get_img', id=pic.id) }}"
+                                alt="{{ pic.name }}"></td>
+                        <td style="width: 1%;">{{ pic.name }}</td>
+                        <td>
+                            <select id="audio" name="audio_{{pic.id}}">
+                                <option value="audio1">Audio 1</option>
+                                <option value="audio2">Audio 2</option>
+                                <option value="audio3">Audio 3</option>
+                                <option value="audio4">Audio 4</option>
+                                <option value="audio5">Audio 5</option>
+                            </select>
+                            <!-- <input type="file" name="audio_file" accept="audio/*" placeholder="Upload Audio"> -->
+                        </td>
+                        <td><input type="text" name="duration" placeholder="Duration"></td>
+                        <td>
+                            <select id="transition" name="transition_{{pic.id}}">
+
+                                <option value="transition1">SlideIn_bottom</option>
+                                <option value="transition2">SlideIn_top</option>
+                                <option value="transition3">SlideIn_left</option>
+                                <option value="transition4">SlideIn_right</option>
+
+                            </select>
+                        </td>
+                    </tr>
+                    {%endfor%}
+
+                </tbody>
+            </table>
+        </form>
+
+    </div>
+    <br><br>
+</body>
+<script>
+
+
+
+    function searchImages() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementsByTagName("table")[0];
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[2];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+</script>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DROP PHOTO</title>
+    <link rel="stylesheet" href="static/dropphoto.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    {{ dropzone.load_css() }}
+    {{ dropzone.style('border: 2px dashed #0087F7; margin: 8% 10% 1% 10%; min-height: 400px;') }}
+</head>
+
+<body>
+
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="{{url_for('home2',user=user)}}"><b>AKS Photoshop</b></a>
+            </div>
+            <div class="nav-links">
+                <a style="background-color: #0088a9;" class="nav-link" href="{{url_for('dropphoto',user=user)}}">Drop
+                    Photos</a>
+                <a class="nav-link" href="{{url_for('slideshow',user=user)}}">Slide Show</a>
+                <a class="nav-link" href="{{url_for('display',user=user)}}">Display</a>
+                <div class="dropdown">
+                    <button class="nav-link dropdown-toggle">Hello, {{user.first_name}}</button>
+                    <div class="dropdown-menu">
+                        <!-- <a href="#">Profile</a> -->
+                        <a href="/logout">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <br>
+
+
+
+
+
+    {{ dropzone.create(action='dropphoto') }}
+    <div style="display: flex;justify-content: center; margin-top: 0%;">
+        <button id="upload-btn" class="button">Upload</button>
+        
+    </div>
+    
+    {{ dropzone.load_js() }}
+    <!-- {{ dropzone.config() }} -->
+    {{ dropzone.config(custom_init='dz = this;document.getElementById("upload-btn").addEventListener("click", function handler(e) {dz.processQueue();});',
+                     custom_options='autoProcessQueue: false, addRemoveLinks: true, parallelUploads: 20,') }}
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+
+</body>
+
+
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Upload</title>
+</head>
+<body>
+
+<div id="drop-area">
+  <h3 class="drop-text">Drag and Drop Images Here</h3>
+  <input type="file" id="fileElem" multiple accept="image/*" style="display: none;" onchange="handleFiles(this.files)">
+  <label class="button" for="fileElem">Select Files</label>
+</div>
+
+<div id="image-preview"></div>
+
+<button id="upload-btn">Upload</button>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="static/dropphoto.js"></script>
+</body>
+</html> -->

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+    <link rel="stylesheet" href="static/users.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="users.html"><b>AKS Photoshop</b></a>
+            </div>
+            <div class="nav-links">
+                <a style="background-color: #0088a9;" class="nav-link" href="">Users</a>
+                <div class="dropdown">
+                    <button class="nav-link dropdown-toggle">Hello, {{yes.first_name}}</button>
+                    <div class="dropdown-menu">
+                        <!-- <a href="#">Profile</a> -->
+                        <a href="/logout">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>User Information</h1>
+        <p>Number of Users: {{users|length}}</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email ID</th>
+                    <th>Images Uploaded</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{user.username}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.get_num_images_uploaded()}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+    <link rel="stylesheet" href="static/login.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <form action="/signup" method="POST" id="signupForm" style=" margin-top: 0.5%;">
+
+        <h2 id="form_name">Sign Up</h2>
+
+        <div class="form-group">
+
+            <input type="text" id="newName" name="newName" required>
+            <label for="newEmail">Name:</label>
+        </div>
+
+        <div class="form-group">
+
+            <input type="text" id="newEmail" name="newEmail" required>
+            <label for="newEmail">Email:</label>
+        </div>
+        <div class="form-group">
+
+            <input type="text" id="newUsername" name="newUsername" required>
+            <label for="newUsername">Username:</label>
+        </div>
+
+        <div class="form-group">
+
+            <input type="password" id="newPassword" name="newPassword" required>
+            <label for="newPassword">Password:</label>
+        </div>
+
+        <!-- <button class="signup_button"  type="submit" onclick="signup()"><b><a
+                        style="text-decoration: none;color: black;" href="">Sign Up</a></b></button> -->
+        <input value="Signup" class="signup_button" type="submit" placeholder="Signup">
+        <!-- <div style="display: block; font-size: 70%;" class="usersuccessinfo"></div> -->
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %} {% for category, message in messages %}
+
+        <div style="display: block; font-size: 70%;" class="usersuccessinfo"> {{ message }}</div>
+
+        {% endfor %} {% endif %} {% endwith %}
+
+        
+    
+            <!-- <div style="display: block; font-size: 70%;" class="usersuccessinfo"> {{ message }}</div> -->
+    
+            
+
+        <div class="switch-form">
+            Already have an account? <a href="/login" onclick="switchForm('loginForm')">Login</a>
+        </div>
+
+    </form>
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+
+</body>
+
+</html>
